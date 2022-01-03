@@ -1,0 +1,17 @@
+Inspiration
+While researching potential ideas to solve, we came across an article that discussed how many citizens of developing nations were unable to access the internet despite having a device to do so. We realized that these people would not be able to access critical information like the news, and weather because of their connectivity issues. Thus, we decided to create MirrorDashboard, which provides information in such times of need by having access to an internet without the use of the internet
+
+What it does
+MirrorDashboard is a low cost, low power, but extremely powerful router that allows users to quickly access important information such as the current news, weather, and first aid information without the presence of a stable internet connection. For example, in a natural disaster, MirrorDashboard allows its users to be constantly updated about current events despite limited connectivity as a result of network congestion. Its minimalistic design allows MirrorDashboard to conserve the amount of bandwidth transferred, decreasing the load time significantly. MirrorDashboard checks for internet access periodically and updates the site’s information from a Google Cloud Compute Engine VM that scrapes the important content. It contains a time stamp which informs the user when the site was last updated. MirrorDashboard is also extremely affordable, allowing it to be used in many locations.
+
+How we built it
+There are two main parts of MirrorDashboard. The first part resides in a Google Cloud VM, where the heavy lifting is done. News and weather sites are scraped and saved periodically. Then, each news article is run through the Google Cloud Natural Language API that performs content classification to filter out unnecessary articles. Then, static pages are built to be served by the Nginx web server, containing news, weather, and first aid information. The next part of the application is the Raspberry Pi, which is used to create an access point that users can connect to, similar to a traditional router because the Raspberry Pi assigns IP addresses for clients, routes packets, and also resolves domain names through a DNS server. It uses two WiFi adapters, the internal one in the Raspberry Pi 3B and a 802.11a/b/g/n adapter to be able to have the access point and use the internet at the same time.
+
+Challenges we ran into
+One challenge we ran into was the using the Raspberry Pi 3B. Originally, we planned to use a Raspberry Pi Zero Wireless, a cheaper option with a smaller footprint. But unfortunately, the USB Micro-B to USB A converter broke, which made it impossible to have 2 network adapters at the same time. Next, we struggled a lot with content classification of the articles. Our implementation was unable to properly organize the news articles in a manner that we wanted it to. Even when we finally succeeded, the code was extremely convoluted. We overcame this challenge by focusing on filtering articles rather than sorting them by category. This way, we could easily display relevant articles to users without worrying about sorting.
+
+Accomplishments that we're proud of
+We’re very proud of the news portion of our website. We were able to create a simple, but effective interface for users that loaded quickly. We’re also very proud our accomplishments with the Raspberry Pi because it was able to function as an access point and act as a client at the same time.
+
+What's next for MirrorDashboard
+We can expand to different news sites and more sources of information, such as daily agriculture prices for farmers.
